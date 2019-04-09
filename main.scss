@@ -1,0 +1,128 @@
+$color-primary: #00BCD4;
+$color-error: #F44336;
+$color-default: #858587;
+$color-gray: #858587;
+$color-mid-gray: #858587;
+$color-gray-border: #ddd;
+
+$input-space-left: 13px;
+$input-radius: 4px;
+$input-heigth: 50px;
+$input-inline-heigth: 46px;
+$font-size: 16px;
+
+@mixin transform($property) {
+  -webkit-transition: $property;
+  -moz-transition: $property;
+  -o-transition: $property;
+  -ms-transition: $property;
+  transition: $property;
+}
+
+main.container {
+  margin-top: 50px;
+}
+
+.mat-input {
+  border: 1px solid $color-gray-border;
+  position: relative;
+  height: $input-heigth;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  border-radius: $input-radius;
+
+  @include transform(all 0.3s ease);
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"] {
+    border-radius: $input-radius;
+    padding: 20px 12px 8px $input-space-left;
+    border: none;
+    flex: 1;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  label {
+    position: absolute;
+    line-height: 14px;
+    left: $input-space-left;
+    top: $input-heigth / 2 - ($font-size / 2) - 1;
+    font-size: $font-size;
+    color: $color-gray;
+    cursor: inherit;
+
+    @include transform(all 0.3s ease);
+  }
+
+  &.inline {
+    height: $input-inline-heigth;
+
+    input[type="text"] {
+      padding: 8px 12px 8px $input-space-left;
+    }
+
+    label {
+      top: $input-inline-heigth / 2 - ($font-size / 2) - 1;
+    }
+
+    &.active label {
+      font-size: 12px;
+      top: -10px;
+      left: $input-space-left - 3px;
+      padding: 0 3px;
+      background: #fff;
+      font-weight: normal;
+    }
+  }
+
+  &.active {
+    label {
+      color: $color-gray;
+      font-weight: bold;
+      font-size: 11px;
+      left: $input-space-left;
+      top: 2px;
+    }
+  }
+
+  &.focus {
+    border-color: $color-primary;
+    box-shadow: 0 0 0 1px $color-primary;
+
+    label {
+      color: $color-primary;
+    }
+  }
+}
+
+.mat-group {
+  margin-bottom: 20px;
+
+  .info {
+    font-size: 12px;
+    display: block;
+    padding: 2px 12px 0 $input-space-left;
+    color: $color-mid-gray;
+  }
+
+  &.error {
+    .info {
+      color: $color-error;
+    }
+
+    .mat-input {
+      border-color: $color-error;
+      box-shadow: 0 0 0 1px $color-error;
+
+      &.active.focus label {
+        color: $color-error;
+      }
+    }
+  }
+}
